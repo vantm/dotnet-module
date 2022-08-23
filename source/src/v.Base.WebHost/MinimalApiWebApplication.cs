@@ -1,4 +1,3 @@
-using v.Base.Core;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using v.Base.Core;
 
 namespace v.Base.WebHost;
 
@@ -15,8 +15,8 @@ public sealed class MinimalApiWebApplication
     private readonly List<Type> _registeredModuleTypes = new();
 
     public TimeSpan MaximumModuleInitializationTimeout { get; set; } = TimeSpan.FromMinutes(3);
-    public bool SkipUsingSwagger { get; set; }
-    public bool UseSwaggerOnProduction { get; set; }
+    public bool HasSwagger { get; set; } = true;
+    public bool HasSwaggerOnProduction { get; set; } = false;
     public RequestDelegate? CustomExceptionHandler { get; set; }
     public BindingFlags BindingFlags { get; private set; }
 
@@ -61,11 +61,14 @@ public sealed class MinimalApiWebApplication
 
     public async Task RunAsync(string? url = null)
     {
-        _builder.Services.AddEndpointsApiExplorer();
-        _builder.Services.AddSwaggerGen(o =>
+        if (HasSwagger)
         {
-            o.CustomSchemaIds(t => t.FullName);
-        });
+            _builder.Services.AddEndpointsApiExplorer();
+            _builder.Services.AddSwaggerGen(o =>
+            {
+                o.CustomSchemaIds(t => t.FullName?.Replace("+", ".") ?? t.Name);
+            });
+        }
 
         var moduleTypes = ModuleHelper.GetDependentModuleTypes(_registeredModuleTypes);
         var moduleAssemblies = moduleTypes.Select(x => x.Assembly).Distinct().ToArray();
@@ -106,7 +109,7 @@ public sealed class MinimalApiWebApplication
             webModule.PreConfigureApp(app);
         }
 
-        if (!SkipUsingSwagger && (UseSwaggerOnProduction || app.Environment.IsDevelopment()))
+        if (HasSwagger && (HasSwaggerOnProduction || app.Environment.IsDevelopment()))
         {
             app.UseSwagger();
             app.UseSwaggerUI();

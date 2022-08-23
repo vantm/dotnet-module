@@ -6,8 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\v.Base.WebHost\v.Base.WebHost.csproj" />
-  </ItemGroup>
-
 </Project>
