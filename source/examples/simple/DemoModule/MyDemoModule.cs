@@ -1,6 +1,6 @@
 using DemoModule.Impl;
 using Microsoft.Extensions.DependencyInjection;
-using v.Base.Core;
+using Modular;
 
 namespace DemoModule;
 

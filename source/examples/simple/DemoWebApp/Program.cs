@@ -1,4 +1,4 @@
-using v.Base.WebHost;
+using Modular.WebHost;
 using DemoWebApp;
 
 var app = new MinimalApiWebApplication(args);

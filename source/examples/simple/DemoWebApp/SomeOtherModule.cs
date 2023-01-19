@@ -1,5 +1,5 @@
 using DemoModule;
-using v.Base.Core;
+using Modular;
 
 namespace DemoWebApp;
 

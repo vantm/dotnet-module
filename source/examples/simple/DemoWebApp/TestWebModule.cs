@@ -1,5 +1,5 @@
-using v.Base.Core;
-using v.Base.WebHost;
+using Modular;
+using Modular.WebHost;
 
 namespace DemoWebApp;
 

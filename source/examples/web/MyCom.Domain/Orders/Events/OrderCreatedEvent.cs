@@ -1,5 +1,5 @@
 using MyCom.Domain.Orders.ValueObjects;
-using v.Base.Core.Domain;
+using Modular.Domain;
 
 namespace MyCom.Domain.Orders.Events;
 

@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\v.Base.Core\v.Base.Core.csproj" />
+      <ProjectReference Include="..\Modular\Modular.csproj" />
     </ItemGroup>
 
 </Project>

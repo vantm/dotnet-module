@@ -2,7 +2,7 @@
 
 using MyCom.Domain.Orders.ValueObjects;
 using MyCom.Domain.Products;
-using v.Base.Core.Domain;
+using Modular.Domain;
 
 namespace MyCom.Domain.Orders
 {

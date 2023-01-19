@@ -6,9 +6,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9DF40D3-D5B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{74AFA7B1-5680-4A18-B4F3-F09BC228A7EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "v.Base.Core", "src\v.Base.Core\v.Base.Core.csproj", "{287559B1-2884-4C3E-99A2-76A3AC586A3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modular", "src\Modular\Modular.csproj", "{287559B1-2884-4C3E-99A2-76A3AC586A3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "v.Base.WebHost", "src\v.Base.WebHost\v.Base.WebHost.csproj", "{F3C9034B-C41C-4612-8E73-95E488F08328}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modular.WebHost", "src\Modular.WebHost\Modular.WebHost.csproj", "{F3C9034B-C41C-4612-8E73-95E488F08328}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{393528DE-A8AD-4416-A377-93E28DB41A93}"
 EndProject
