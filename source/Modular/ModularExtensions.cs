@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using System.Reflection;
-using System.Linq;
 
 namespace Modular;
 
@@ -24,7 +22,6 @@ public static class ModularExtensions
             .ToArray();
 
         var moduleTypes = ModuleHelper.GetDependentModuleTypes(assemblyModules);
-        var moduleAssemblies = moduleTypes.Select(x => x.Assembly).Distinct().ToArray();
 
         var modules = new IModule[moduleTypes.Length];
         var index = 0;

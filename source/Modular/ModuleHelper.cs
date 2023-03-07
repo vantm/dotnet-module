@@ -26,7 +26,7 @@ internal static class ModuleHelper
                 {
                     queue.Enqueue(dependentModuleType);
                 }
-                
+
                 queue.Enqueue(currentModuleType);
             }
         }

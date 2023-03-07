@@ -1,6 +1,5 @@
 using Modular;
 using SomeModules;
-using System.Diagnostics;
 
 namespace DemoWebApp;
 
@@ -33,8 +32,6 @@ public class MockHostedService : IHostedService
 
         if (_env.IsDevelopment())
         {
-            var stackTrace = new StackTrace();
-            var logName = stackTrace.GetFrame(1)!.GetMethod()!.Name;
             var moduleNames = _allModules.Select(x => x.GetType().Name);
             _logger.LogDebug("Ordered modules: {0}", string.Join(", ", moduleNames));
         }
