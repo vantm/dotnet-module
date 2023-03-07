@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Modular.WebHost\Modular.WebHost.csproj" />
-    <ProjectReference Include="..\DemoModule\DemoModule.csproj" />
+    <ProjectReference Include="..\Modular\Modular.csproj" />
+    <ProjectReference Include="..\SomeModules\SomeModules.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using Modular;
 using System.Reflection;
 
-namespace Modular.WebHost;
+namespace Modular;
 
 internal static class ModuleHelper
 {
@@ -13,22 +13,25 @@ internal static class ModuleHelper
         while (queue.Count > 0)
         {
             var currentModuleType = queue.Dequeue();
-
-            output.Add(currentModuleType);
-
             var dependentModuleTypes = GetDependentModuleTypes(currentModuleType);
+            var remainDependentModuleTypes = dependentModuleTypes.Where(x => !output.Contains(x)).ToArray();
 
-            foreach (var dependentModuleType in dependentModuleTypes)
+            if (remainDependentModuleTypes.Length == 0)
             {
-                if (!queue.Contains(dependentModuleType) &&
-                    !output.Contains(dependentModuleType))
+                output.Add(currentModuleType);
+            }
+            else
+            {
+                foreach (var dependentModuleType in remainDependentModuleTypes.Where(x => !queue.Contains(x)))
                 {
                     queue.Enqueue(dependentModuleType);
                 }
+                
+                queue.Enqueue(currentModuleType);
             }
         }
 
-        return output.Reverse().ToArray();
+        return output.ToArray();
     }
 
     private static Type[] GetDependentModuleTypes(Type currentModuleType)

@@ -1,30 +1,27 @@
-using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using System;
 
-namespace Modular.WebHost;
+namespace Modular;
 
 internal static class ValidationExceptionHandlingMiddleware
 {
-    public static async Task Handle(HttpContext context, ILogger logger)
+    public static async Task Handle<TValidationException>(
+        HttpContext context,
+        Func<TValidationException, IEnumerable<(string PropName, string ErrorMessage)>> getErrors) where TValidationException : Exception
     {
         var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
 
-        if (exceptionHandlerPathFeature?.Error is ValidationException err)
+        if (exceptionHandlerPathFeature?.Error is TValidationException err)
         {
             var modelState = new ModelStateDictionary();
 
-            foreach (var error in err.Errors)
+            foreach (var error in getErrors(err))
             {
-                modelState.AddModelError(error.PropertyName, error.ErrorMessage);
-            }
-
-            if (logger.IsEnabled(LogLevel.Debug))
-            {
-                logger.LogDebug("Catch {number} validation errors on {url}", err.Errors.Count(), context.Request.Path);
+                modelState.AddModelError(error.PropName, error.ErrorMessage);
             }
 
             var errors = modelState.ToDictionary(
